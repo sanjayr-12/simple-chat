@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Room</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        height: 100vh;
+        width: 100vw;
+        font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .form-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+      }
+      input[type="text"] {
+        padding: 10px;
+        font-size: medium;
+        width: 300px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+      }
+      input[type="submit"] {
+        padding: 10px 20px;
+        font-size: large;
+        font-weight: 400;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        background-color: rgb(215, 80, 80);
+        color: white;
+      }
+      input[type="submit"]:hover {
+        opacity: 0.8;
+      }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h1>Create Room</h1>
+        <form action="/create" method="post">
+            <input type="text" placeholder="Enter the room name" name="roomName" required>
+            <input type="submit" value="Create Room">
+        </form>
+    </div>
+</body>
+</html>

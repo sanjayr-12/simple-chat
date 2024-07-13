@@ -1,38 +1,50 @@
 const socket = io();
 
-const form = document.getElementById('form')
-const input = document.getElementById('input')
+function getUrlname(name) {
+  const urlPara = new URLSearchParams(window.location.search);
+  return urlPara.get(name);
+}
 
-const message  = document.getElementById('messages')
+const roomName = getUrlname("room");
+if (roomName) {
+  socket.emit("join room", { roomName });
+} else {
+  console.log("room is not valid");
+}
 
-form.addEventListener('submit', (e) => {
-    e.preventDefault()
-    if (input.value) {
-        socket.emit('message', input.value)
-        input.value = '';
-    }
-})
+const form = document.getElementById("form");
+const input = document.getElementById("input");
+const messages = document.getElementById("messages");
 
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+  if (input.value) {
+    socket.emit("message", { roomName, message: input.value });
+    input.value = "";
+  }
+});
 
-socket.on('message', (msg) => {
-    const item = document.createElement('li')
-    item.textContent = msg
-    message.appendChild(item)
-})
+socket.on("message", ({ message }) => {
+  if (!message) {
+    alert("room is not valid");
+  } else {
+    const item = document.createElement("li");
+    console.log(message);
+    item.textContent = message;
+    messages.appendChild(item);
+  }
+});
 
+// Connection state recovery
+const disconnectBtn = document.getElementById("disconnect-btn");
 
-//connection state recovery
-//temporarily store all the events that are sent by the server and will restore when the client reconnects
-
-const disconnectBtn = document.getElementById('disconnect-btn')
-
-disconnectBtn.addEventListener('click', (e) => {
-    e.preventDefault();
-    if (socket.connected) {
-        disconnectBtn.innerText = 'Connect'
-        socket.disconnect()
-    } else {
-        disconnectBtn.innerText = 'Disconnect'
-        socket.connect()
-    }
-})
+disconnectBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+  if (socket.connected) {
+    disconnectBtn.innerText = "Connect";
+    socket.disconnect();
+  } else {
+    disconnectBtn.innerText = "Disconnect";
+    socket.connect();
+  }
+});

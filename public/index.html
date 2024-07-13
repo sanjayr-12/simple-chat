@@ -3,21 +3,70 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Chat Application</title>
-    <link rel="stylesheet" href="./styles.css" />
+    <title>Index</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        height: 100vh;
+        width: 100vw;
+        font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+      }
+      .main {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 30px;
+      }
+      button {
+        width: 20%;
+        padding: 20px;
+        font-size: large;
+        font-weight: 400;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+      }
+      .text {
+        font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+      }
+      #create-room {
+        background-color: rgb(215, 80, 80);
+      }
+      #create-room:hover {
+        opacity: 0.8;
+      }
+      #join-room:hover {
+        opacity: 0.8;
+      }
+      #join-room {
+        background-color: rgb(229, 176, 90);
+      }
+    </style>
   </head>
   <body>
-    <ul id="messages"></ul>
-    <form id="form" action="">
-      <input id="input" autocomplete="off" /><button>Send</button>
-      <button id="disconnect-btn">Disconnect</button>
-    </form>
-    <!-- <form id="form" action="">
-      <input id="input" autocomplete="off" /><button>Send</button>
-      
-    </form> -->
+    <div class="main">
+      <div class="text">
+        <h1>Chat</h1>
+      </div>
+      <button id="create-room">Create Room</button>
+      <button id="join-room">Join Room</button>
+    </div>
+    <script>
+      const createRoom = document.getElementById("create-room");
+      const joinRoom = document.getElementById("join-room");
 
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="./script.js"></script>
+      createRoom.addEventListener("click", () => {
+        location.href = "./createRoom.html";
+      });
+
+      joinRoom.addEventListener("click", () => {
+        location.href = "./JoinRoom.html";
+      });
+    </script>
   </body>
 </html>
